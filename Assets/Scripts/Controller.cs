@@ -8,7 +8,7 @@ public class Controller : MonoBehaviour
 {
     protected float[] fingerAction = {0,0,0,0};
 
-    [SerializeField] protected HandAnimation hand;
+    [SerializeField] protected HandAnimationOld hand;
     
     [SerializeField] protected Player player;
     protected HandPose handPose;
