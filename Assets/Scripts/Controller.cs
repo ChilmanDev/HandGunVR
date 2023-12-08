@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 
 enum Finger{Index, Middle, Ring, Pinky}
 
 public class Controller : MonoBehaviour
 {
     protected float[] fingerAction = {0,0,0,0};
-
-    [SerializeField] protected HandAnimationOld hand;
     
     [SerializeField] protected Player player;
     protected HandPose handPose;
-    
 
     // Update is called once per frame
     protected void Start() {
@@ -21,26 +20,51 @@ public class Controller : MonoBehaviour
     }
     protected void Update()
     {
-        setHandFingers();
         UpdateHandPose();
         setPlayerHandPose();
+    }
+    // public void GripPressedEvent(float state)
+    // {
+    //     int i = state > 0 ? 1 : 0;
+        
+    //     fingerAction[(int)Finger.Middle] = i;
+    //     fingerAction[(int)Finger.Ring] = i;
+    //     fingerAction[(int)Finger.Pinky] = i;
+    // }
+    public void GripPressedEvent(InputAction.CallbackContext ctx)
+    {
+        var state = ctx.ReadValue<float>();
+        
+        int i = state > 0 ? 1 : 0;
+        
+        fingerAction[(int)Finger.Middle] = i;
+        fingerAction[(int)Finger.Ring] = i;
+        fingerAction[(int)Finger.Pinky] = i;
+    }
+    
+    // public void TriggerPressedEvent(float state)
+    // {
+    //     fingerAction[(int)Finger.Index] = state > 0 ? 1 : 0;
+    // }
+    public void ShootButtonPressedEvent(InputAction.CallbackContext ctx)
+    {
+        player.Shoot();
+    }
+    public void TriggerPressedEvent(InputAction.CallbackContext ctx)
+    {
+        var state = ctx.ReadValue<float>();
+        
+        fingerAction[(int)Finger.Index] = state > 0 ? 1 : 0;
     }
 
     protected float getFingerValue(int _finger)
     {
         return fingerAction[_finger];
     }
-
-    protected void setHandFingers()
-    {
-        for(int i=0; i < 4; i++){
-            hand.SetFinger(i, getFingerValue(i));
-        }
-    }
     
     protected void UpdateHandPose()
     {
-        if (checkHandPose(false, false, true, true))
+        if (checkHandPose(false, true, true, true))
             handPose = HandPose.Gun;
         
         else if (checkHandPose(false, true, true, false))

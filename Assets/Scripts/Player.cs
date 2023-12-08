@@ -11,7 +11,6 @@ public class Player : MonoBehaviour
     //[SerializeField] float sense = 0.0005f;
     [SerializeField] float aimAssistSize = 5f;
     [SerializeField] float maxRange = 30f;
-    LineRenderer lineRenderer;
     //[SerializeField] float X = 2, Y = 2;
 
     [SerializeField] HandPose handPose;
@@ -26,71 +25,38 @@ public class Player : MonoBehaviour
 
     Vector3 startPos;
 
-    int bulletCount = 3;
+    int bulletCount = 111;
     void Awake() {
         
     }
     void Start()
     {
-        lineRenderer = GetComponent<LineRenderer>();
-        //lineRenderer.SetPosition(0, transform.position);
-        startPos = aim.transform.position;
+        //startPos = aim.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        
-        lineRenderer.SetPosition(0, aimOrigin.position);
-        Vector3 pos = aimOrigin.position + ((aimTarget.position - aimOrigin.position).normalized * maxRange);
-        //pos = aim.transform.position;
-        lineRenderer.SetPosition(1, pos);
 
-        if (Physics.SphereCast(aimOrigin.position, aimAssistSize, (aimTarget.position - aimOrigin.position).normalized, out RaycastHit hit, maxRange))
-        {
-            aimAssist.transform.position = hit.point;
-        }
-        else if (Physics.SphereCast(aimOrigin.position, aimAssistSize * 3, (aimTarget.position - aimOrigin.position).normalized, out RaycastHit hitCast, maxRange))
-        {
-            aimAssist.transform.position = hitCast.point;
-        }
-        else
-        {
-            aimAssist.transform.position = Vector3.zero;
-        }
+        // if (Physics.SphereCast(aimOrigin.position, aimAssistSize, (aimTarget.position - aimOrigin.position).normalized, out RaycastHit hit, maxRange))
+        // {
+        //     aimAssist.transform.position = hit.point;
+        // }
+        // else if (Physics.SphereCast(aimOrigin.position, aimAssistSize * 3, (aimTarget.position - aimOrigin.position).normalized, out RaycastHit hitCast, maxRange))
+        // {
+        //     aimAssist.transform.position = hitCast.point;
+        // }
+        // else
+        // {
+        //     aimAssist.transform.position = Vector3.zero;
+        // }
 
         UpdateParticles();
-        KeyboardInputs();
         //Trigger();
         //Aim();
     }
 
-    void KeyboardInputs()
-    {
-
-        if (Input.GetKeyDown(KeyCode.E))
-            TryShoot();
-        
-        if (Input.GetKeyDown(KeyCode.R))
-            Reload();
-
-        float x = Input.GetAxisRaw("Horizontal");
-        float y = Input.GetAxisRaw("Vertical");
-
-        Vector3 newPos = Vector3.zero;// = aim.transform.localPosition + new Vector3(x, y, 0);
-
-        //newPos = new Vector3(Mathf.Clamp(x, -X, X), Mathf.Clamp(y, -Y, Y), 0);
-
-        // x*= sense*40;
-        // y*= sense*40;
-
-        newPos = new Vector3(x, y, 0);
-
-        //aim.transform.localPosition = new Vector3(Mathf.Clamp(aim.transform.localPosition.x + newPos.x, -X, X), Mathf.Clamp(aim.transform.localPosition.y + newPos.y, -Y, Y), aim.transform.localPosition.z);
-    }
-
-    void Shoot()
+    public void Shoot()
     {
         bulletCount--;
         if (Physics.SphereCast(aimOrigin.position, aimAssistSize, (aimTarget.position - aimOrigin.position).normalized, out RaycastHit raycastHit, maxRange))
