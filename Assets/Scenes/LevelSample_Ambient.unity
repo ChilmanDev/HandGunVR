@@ -32429,6 +32429,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 188187304040778165, guid: 71769aead1b32384d884fb9c7fbdb6a6, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: 999
+      objectReference: {fileID: 0}
+    - target: {fileID: 188187304040778165, guid: 71769aead1b32384d884fb9c7fbdb6a6, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 813469935707548764, guid: 71769aead1b32384d884fb9c7fbdb6a6, type: 3}
       propertyPath: m_Name
       value: FireRock
