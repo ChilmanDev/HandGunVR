@@ -48,7 +48,7 @@ public class Controller : MonoBehaviour
     // }
     public void ShootButtonPressedEvent(InputAction.CallbackContext ctx)
     {
-        player.Shoot();
+        player.TryShoot();
     }
     public void TriggerPressedEvent(InputAction.CallbackContext ctx)
     {

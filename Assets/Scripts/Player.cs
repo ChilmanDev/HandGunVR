@@ -5,8 +5,8 @@ public enum HandPose { None, Gun, Spidey, Fist, Paper, Point}
 public class Player : MonoBehaviour
 {
     //[SerializeField] JustRead ardData;
-    public GameObject aim;
-    public GameObject aimAssist;
+    //public GameObject aim;
+    //public GameObject aimAssist;
 
     //[SerializeField] float sense = 0.0005f;
     [SerializeField] float aimAssistSize = 5f;
@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
         //Aim();
     }
 
-    public void Shoot()
+    void Shoot()
     {
         bulletCount--;
         if (Physics.SphereCast(aimOrigin.position, aimAssistSize, (aimTarget.position - aimOrigin.position).normalized, out RaycastHit raycastHit, maxRange))
@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
                 raycastHit.collider.gameObject.GetComponent<Target>().handleHit(handPose);
             }
         }
-        else if (Physics.SphereCast(transform.position, aimAssistSize * 2, (aim.transform.position - transform.position).normalized, out RaycastHit raycastHit2, maxRange))
+        else if (Physics.SphereCast(transform.position, aimAssistSize * 2, (aimTarget.position - aimOrigin.position).normalized, out RaycastHit raycastHit2, maxRange))
         {
             if(raycastHit2.collider.gameObject.GetComponent<Target>())
             { 
@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void TryShoot()
+    public void TryShoot()
     {
         if(bulletCount > 0) Shoot();
         else
@@ -105,17 +105,6 @@ public class Player : MonoBehaviour
     //         triggerHold = true;
     //     }
     // }
-
-    // void Aim()
-    // {
-    //     if(Mathf.Abs(ardData.gyro.x)  > 3)
-    //         aim.transform.position = new Vector3(aim.transform.position.x + ardData.gyro.x * sense, aim.transform.position.y, aim.transform.position.z);
-
-    //     if(Mathf.Abs(ardData.gyro.z) > 3)
-    //     aim.transform.position = new Vector3(aim.transform.position.x, aim.transform.position.y + ardData.gyro.z * sense, aim.transform.position.z);
-
-    //     if(ardData.reload) Reload();
-    // }
     
     //enum HandPose { None, Gun, Spidey, Fist, Paper, Point}
     public void setHandPose(HandPose pose)
@@ -133,7 +122,7 @@ public class Player : MonoBehaviour
     void Reload()
     {
         bulletCount = 3;
-        aim.transform.position = startPos;
+        //aim.transform.position = startPos;
     }
 
     public int getBulletCount()

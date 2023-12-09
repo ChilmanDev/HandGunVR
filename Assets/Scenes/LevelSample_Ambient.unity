@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.2010929, g: 0.3479328, b: 0.24768409, a: 1}
+  m_IndirectSpecularColor: {r: 0.20109369, g: 0.34793374, b: 0.24768525, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2749,8 +2749,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16830431d33a6f8448cd9dce4eb9567b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aim: {fileID: 0}
-  aimAssist: {fileID: 0}
   aimAssistSize: 5
   maxRange: 30
   handPose: 0
@@ -20560,8 +20558,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16830431d33a6f8448cd9dce4eb9567b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aim: {fileID: 1527899753}
-  aimAssist: {fileID: 1590408526}
   aimAssistSize: 0.7
   maxRange: 100
   handPose: 0
@@ -23644,7 +23640,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1527899753}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -24501,11 +24497,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba426b22dba6c974f908bed162f89279, type: 3}
---- !u!1 &1590408526 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7498033513166198491, guid: dda01b201bcaba7479448542d6bc23b0, type: 3}
-  m_PrefabInstance: {fileID: 5539324494317584666}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1593719206 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4306462279110362, guid: c5a6c38dcf5f15d42bfa04a454f06484, type: 3}
@@ -28618,6 +28609,38 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 533aeb95-18b2-4a83-a69d-f6e0be72ff8a
     m_ActionName: XRI UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2001923344}
+        m_TargetAssemblyTypeName: Controller, Assembly-CSharp
+        m_MethodName: ShootButtonPressedEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b293d5c3-46a6-4732-96dc-c2ac2b78955e
+    m_ActionName: XRI LeftHand Interaction/Primary
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 77134364}
+        m_TargetAssemblyTypeName: Controller, Assembly-CSharp
+        m_MethodName: ShootButtonPressedEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ab36393e-003e-434c-b88c-743c58d05b05
+    m_ActionName: XRI RightHand Interaction/Primary
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Generic XR Controller
   m_DefaultActionMap: XRI Head
@@ -31623,8 +31646,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16830431d33a6f8448cd9dce4eb9567b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aim: {fileID: 0}
-  aimAssist: {fileID: 0}
   aimAssistSize: 5
   maxRange: 30
   handPose: 0
