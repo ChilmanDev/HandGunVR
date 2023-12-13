@@ -601,7 +601,7 @@
                     "id": "b293d5c3-46a6-4732-96dc-c2ac2b78955e",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "initialStateCheck": false
                 },
                 {

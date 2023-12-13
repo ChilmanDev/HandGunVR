@@ -11,8 +11,9 @@ public class Target : MonoBehaviour
 
 
 
-    [SerializeField] ParticleSystem particleConst;
-    [SerializeField] ParticleSystem particleDestroy;
+    [SerializeField] GameObject particleConst;
+    [SerializeField] GameObject particleDestroy;
+    [SerializeField] AudioSource soundSource;
 
     // Start is called before the first frame update
     void Start()
@@ -24,14 +25,6 @@ public class Target : MonoBehaviour
     void Update()
     {
         transform.Translate(new Vector3(0f,1f,0f) * speed * Time.deltaTime);
-
-        if(!particleDestroy.gameObject.activeInHierarchy)
-            return;
-        if(particleDestroy.isStopped)
-        {
-            Destroy(gameObject);
-            GameManager.Instance.TargetDestroyed();
-        }
     }
 
     public void Activate(){
@@ -54,10 +47,11 @@ public class Target : MonoBehaviour
 
     void hitTarget()
     {
-        particleConst.gameObject.SetActive(false);
-        GetComponent<MeshRenderer>().enabled = false;
-        particleDestroy.gameObject.SetActive(true);
-        StartCoroutine("DelayDestroy", 0.2f);
+        particleConst.SetActive(false);
+        GetComponent<SphereCollider>().enabled = false;
+        particleDestroy.SetActive(true);
+        soundSource.Play();
+        StartCoroutine("DelayDestroy", 1f);
     }
 
     IEnumerator DelayDestroy(float sec)

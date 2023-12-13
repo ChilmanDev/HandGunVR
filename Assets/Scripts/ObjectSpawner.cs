@@ -6,6 +6,7 @@ public class ObjectSpawner : MonoBehaviour
 {
     [SerializeField] GameObject[] objects;
     [HideInInspector] bool active;
+    [SerializeField] GameObject targetsHolder;
     
     Transform[] spawnPoints;
     private float count = 0.0f, timer;
@@ -33,6 +34,7 @@ public class ObjectSpawner : MonoBehaviour
             {
                 count = 0;           
                 Spawn();
+                Spawn();
             }
         }
     }
@@ -43,7 +45,7 @@ public class ObjectSpawner : MonoBehaviour
 
         int randPos = Random.Range(0, transform.childCount);
 
-        Instantiate(objects[randObj], spawnPoints[randPos].position, objects[randObj].transform.rotation);
+        Instantiate(objects[randObj], spawnPoints[randPos].position, objects[randObj].transform.rotation, targetsHolder.transform);
 
         GameManager.Instance.AddTarget();
     }
@@ -58,5 +60,10 @@ public class ObjectSpawner : MonoBehaviour
     public void Deactivate()
     {
         active = false;
+        
+        for(int i=0; i < targetsHolder.transform.childCount; i ++)
+        {
+            Destroy(targetsHolder.transform.GetChild(i).gameObject);
+        }
     }
 }

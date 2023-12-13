@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.XR.Interaction.Toolkit;
 
 enum Difficulty { None, Hard, Medium, Easy}
 
@@ -26,14 +27,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshPro multiplierText;
 
     int totalTargets, targetHits, targetMisses;
-    
-    [SerializeField] GameObject scoreBoard;
+   
     [SerializeField] GameObject resultScreen;
-    [SerializeField] TextMeshProUGUI hitsText, missesText, percentageText, finalScoreText;
-
-    [SerializeField] GameObject chargesHolder;
-    [SerializeField] GameObject chargePrefab;
-    [SerializeField] GameObject outOfChargesText;
+    [SerializeField] TextMeshProUGUI hitsText, missesText, finalScoreText;
+    
+    [SerializeField] LineRenderer leftRenderer, rightRenderer;
+    [SerializeField] XRInteractorLineVisual leftInteractor, rightInteractor;
 
     public static GameManager Instance;
 
@@ -52,11 +51,6 @@ public class GameManager : MonoBehaviour
         StartCoroutine("StartMusic");
 
         spawner.Activate(music.beatTempo, (int)difficulty);
-
-        for(int i = 0; i < player.getBulletCount(); i++)
-        {
-            Instantiate(chargePrefab, Vector3.zero, Quaternion.identity, chargesHolder.transform);
-        }
     }
 
     // Update is called once per frame
@@ -104,21 +98,8 @@ public class GameManager : MonoBehaviour
     {
         scoreText.text = "Score: " + currentScore;
         multiplierText.text = "Multiplier: " + currentMultiplier + "x";
-        UpdateCharges();
     }
-
-    void UpdateCharges()
-    {
-        int charges = player.getBulletCount();
-
-        outOfChargesText.SetActive(charges == 0);
-
-        for(int i = 0; i < chargesHolder.transform.childCount; i++)
-        {
-            chargesHolder.transform.GetChild(i).gameObject.SetActive(i+1 <= charges);
-        }
-    }
-
+    
     public void AddTarget()
     {
         totalTargets++;
@@ -132,19 +113,23 @@ public class GameManager : MonoBehaviour
         if(!audioSource.isPlaying && !resultScreen.activeInHierarchy)
         {
             spawner.Deactivate();
-            scoreBoard.SetActive(false);
             resultScreen.SetActive(true);
 
             hitsText.text = "" + targetHits;
             missesText.text = "" + targetMisses;
-            percentageText.text = "" + (int)(targetHits * 100.0f/totalTargets);
             finalScoreText.text = "" + currentScore;
+            
+            leftRenderer.enabled = false;
+            rightRenderer.enabled = false;
+            
+            leftInteractor.enabled = true;
+            rightInteractor.enabled = true;
         }
     }
 
     void CheatCodes()
     {
-        if(Input.GetKeyDown(KeyCode.Keypad7))
+        if(Input.GetKeyDown(KeyCode.F7))
             audioSource.Stop();
     }
 }
